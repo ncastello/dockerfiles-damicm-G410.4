@@ -1,0 +1,25 @@
+version: "3.2"
+
+services:
+    geant410:
+        build: .
+        image: ncastello/damicm-geant4.10.4
+
+    damic100:
+        image: ncastello/damicm-geant4.10.4
+        environment:
+            - DISPLAY=unix${DISPLAY}
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - type: bind
+              source: /home/ncastello/repos/DAMIC-DAMIC-M/DAMICSNOLAB_G4sims
+              target: /home/damicmuser/G4104Sim
+    damicm:
+        image: ncastello/damicm-geant4.10.4
+        environment:
+            - DISPLAY=unix${DISPLAY}
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - type: bind
+              source: /home/ncastello/repos/DAMIC-DAMIC-M/DAMICM_G4Sims
+              target: /home/damicmuser/G4104Sim
