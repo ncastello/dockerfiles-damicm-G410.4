@@ -112,12 +112,18 @@ RUN mkdir -p /opt/geant4.10 \
 # Boot and damicm source container with GEANT4 started
 WORKDIR /home/damicmuser/G4104Sim
 
-#
+##### download the script to automatically install simulation code
+RUN cd /home/damicmuser/G4104Sim && wget https://github.com/ncastello/dockerfiles-damicm-G410.4/blob/master/rd100s.sh \
+    && chown -R damicmuser:damicmuser /home/damicmuser/G4104Sim
+
 USER damicmuser
 
+##### environment for DAMIC simulation code
 ENV HOME /home/damicmuser
 ENV DAMICM_SIM_ROOT /home/damicmuser/G4104Sim/DamicG4
 ENV DAMICM_RUN_DIR $DAMICM_SIM_ROOT/build
+ENV PATH="${PATH}:$DAMICM_SIM_ROOT"
+ENV PATH="${PATH}:$DAMICM_SIM_ROOT/build"
 
 
 ENTRYPOINT ["/bin/bash"]
