@@ -13,7 +13,7 @@ export DAMIC_CODE_DIR=/home/damicmuser/G4104Sim/DamicG4
 
 cd $DAMIC_RUN_DIR
 
-cmake DGeant4_DIR=${G4_DIR} ${DAMIC_RUN_DIR}
+cmake DGeant4_DIR=${G4_DIR} ${DAMIC_CODE_DIR}
 sudo make install
 
 
