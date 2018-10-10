@@ -115,7 +115,7 @@ WORKDIR /home/damicmuser/G4104Sim
 ##### download the script to automatically install simulation code
 ENV rundirectory /home/damicmuser/RunDirectory
 RUN mkdir $rundirectory && cd $rundirectory \
-    && wget https://github.com/ncastello/dockerfiles-damicm-G410.4/blob/master/rd100s.sh \
+    && wget https://raw.githubusercontent.com/ncastello/dockerfiles-damicm-G410.4/master/rd100s.sh \
     && chown -R damicmuser:damicmuser $rundirectory
 
 USER damicmuser
