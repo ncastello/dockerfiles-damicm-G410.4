@@ -3,10 +3,10 @@ version: "3.2"
 services:
     geant410:
         build: .
-        image: ncastello/damicm-geant4.10.4
+        image: ncastello/damicm-geant4.10.4:latest
 
     damic100:
-        image: ncastello/damicm-geant4.10.4
+        image: ncastello/damicm-geant4.10.4:latest
         environment:
             - DISPLAY=unix${DISPLAY}
         volumes:
@@ -14,8 +14,9 @@ services:
             - type: bind
               source: /home/ncastello/repos/DAMIC-DAMIC-M/DAMICSNOLAB_G4sims
               target: /home/damicmuser/G4104Sim
+
     damicm:
-        image: ncastello/damicm-geant4.10.4
+        image: ncastello/damicm-geant4.10.4:latest
         environment:
             - DISPLAY=unix${DISPLAY}
         volumes:
