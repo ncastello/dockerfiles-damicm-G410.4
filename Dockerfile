@@ -116,10 +116,9 @@ WORKDIR /home/damicmuser/G4104Sim
 USER damicmuser
 
 ENV HOME /home/damicmuser
-ENV DAMICM_SIM_ROOT /G4104Sim/DamicG4
+ENV DAMICM_SIM_ROOT /home/damicmuser/G4104Sim/DamicG4
 ENV DAMICM_RUN_DIR $DAMICM_SIM_ROOT/build
 
 
 ENTRYPOINT ["/bin/bash"]
-
 
