@@ -9,8 +9,11 @@ This image is based on an ubuntu-16.04 and contains the necessary packages to ru
 ## Install
 
 Assuming `docker` and `docker-compose` is installed on your system (host-computer).
+
 [how to install docker](https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce-1) in linux
+
 [how to install docker-compose](https://docs.docker.com/compose/install/#install-compose) in linux
+
 execute docker without requiring sudo: 
 ```
 $ sudo usermode -a -G $USER
