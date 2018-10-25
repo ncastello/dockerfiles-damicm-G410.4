@@ -3,7 +3,40 @@ version: "3.2"
 services:
     geant410:
         build: .
-        image: ncastello/damicm-geant4.10.4:latest
+        image: ncastello/damicm-geant4.10.4
+
+    damicm_dev_debbugON:
+        image: ncastello/damicm-geant4.10.4:expatONdebbugON
+        environment:
+            - DISPLAY=unix${DISPLAY}
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - type: bind
+              source: /home/ncastello/repos/DAMIC-DAMIC-M/DAMICM_G4Sims
+              target: /home/damicmuser/G4104Source
+            - type: bind
+              source: /data/DAMIC/simulations/ddm
+              target: /home/damicmuser/G4104Run
+
+    damicm_prod:
+        image: ncastello/damicm-geant4.10.4:production
+        environment:
+            - DISPLAY=unix${DISPLAY}
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+
+    damicm_dev_debbugOFF:
+        image: ncastello/damicm-geant4.10.4:expatONdebbugOFF
+        environment:
+            - DISPLAY=unix${DISPLAY}
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix
+            - type: bind
+              source: /home/ncastello/repos/DAMIC-DAMIC-M/DAMICM_G4Sims
+              target: /home/damicmuser/G4104Source
+            - type: bind
+              source: /data/DAMIC/simulations/ddm
+              target: /home/damicmuser/G4104Run
 
     damic100:
         image: ncastello/damicm-geant4.10.4:latest
@@ -13,14 +46,19 @@ services:
             - /tmp/.X11-unix:/tmp/.X11-unix
             - type: bind
               source: /home/ncastello/repos/DAMIC-DAMIC-M/DAMICSNOLAB_G4sims
-              target: /home/damicmuser/G4104Sim
+              target: /home/damicmuser/G4104Source
+            - type: bind
+              source: /data/DAMIC/simulations/dd100
+              target: /home/damicmuser/G4104Run
 
-    damicm:
+    gebic:
         image: ncastello/damicm-geant4.10.4:latest
         environment:
             - DISPLAY=unix${DISPLAY}
         volumes:
             - /tmp/.X11-unix:/tmp/.X11-unix
             - type: bind
-              source: /home/ncastello/repos/DAMIC-DAMIC-M/DAMICM_G4Sims
-              target: /home/damicmuser/G4104Sim
+              source: /data/DAMIC/canfranc/
+              target: /home/damicmuser/
+
+

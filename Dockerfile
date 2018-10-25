@@ -6,7 +6,7 @@ FROM rootproject/root-ubuntu16:latest
 
 LABEL author="nuria.castello.mor@gmail.com" \
     version="1.0" \
-    description="Docker image for GEANT4 DAMIC simulation"
+    description="Docker image for GEANT4 DAMICM development"
 
 USER 0
 
@@ -69,19 +69,6 @@ RUN mkdir /opt/DAWN  \
     && make -f Makefile.GNU_g++ install \
     && chown -R damicmuser:damicmuser /opt/DAVID
 
-# BUILD THE GDML MODULE NEEDS THE XERCESC PARSER PRE-INSTALLED
-RUN mkdir -p /opt/XercesC \
-    && cd /opt/XercesC \
-    && wget http://www-us.apache.org/dist//xerces/c/3/sources/xerces-c-3.2.2.tar.gz \
-    && tar -xzf xerces-c-3.2.2.tar.gz\
-    && cd xerces-c-3.2.2 \
-    && mkdir /opt/XercesC/xerces-c-3.2.2/build && cd /opt/XercesC/xerces-c-3.2.2/build \
-    && cmake -DCMAKE_INSTALL_PREFIX:PATH=/opt/XercesC/xerces-c-3.2.2/bin /opt/XercesC/xerces-c-3.2.2 \
-    && make -j`grep -c processor /proc/cpuinfo` \
-    && make install \
-    && chown -R damicmuser:damicmuser /opt/XercesC
-
-
 # Download, extract and install GEANT4
 RUN mkdir -p /opt/geant4.10 \
     && cd /opt/geant4.10 \
@@ -99,6 +86,7 @@ RUN mkdir -p /opt/geant4.10 \
        -DGEANT4_USE_OPENGL_X11=ON  \
        -DGEANT4_USE_RAYTRACER_X11=ON \
        -DGEANT4_USE_GDML=ON \
+       -DCMAKE_BUILD_TYPE=Debug \
        -Wno-dev \
 #       -DGEANT4_INSTALL_DATADIR=/data/geant4-10.4.1/data \
 #       -DGEANT4_USE_FREETYPE=ON \
@@ -106,26 +94,18 @@ RUN mkdir -p /opt/geant4.10 \
     && make install \
     && echo '. /usr/local/bin/geant4.sh' >> ~damicmuser/.bashrc \
     && /bin/bash -c ". /usr/local/bin/geant4.sh" \
+#    && echo "source /usr/local/bin/geant4.sh" >> ~damicmuser/.bashrc \
     && chown damicmuser:damicmuser ~damicmuser/.bashrc \
     && chown -R damicmuser:damicmuser /opt/geant4.10
 
-# Boot and damicm source container with GEANT4 started
-WORKDIR /home/damicmuser/G4104Sim
+RUN mkdir /home/damicmuser/scripts && chown -R damicmuser:damicmuser /home/damicmuser/scripts \
+    && mkdir /home/damicmuser/G4104Source && chown -R damicmuser:damicmuser /home/damicmuser/G4104Source \
+    && mkdir /home/damicmuser/G4104Run && chown -R damicmuser:damicmuser /home/damicmuser/G4104Run
 
-##### download the script to automatically install simulation code
-ENV rundirectory /home/damicmuser/RunDirectory
-COPY rd100s.sh ${rundirectory}/rd100.sh
-RUN mkdir $rundirectory && cd $rundirectory 
-    && chown -R damicmuser:damicmuser $rundirectory
+COPY my_scripts/compile_DAMICMG4_in_docker.sh /home/damicmuser/scripts
 
+WORKDIR /home/damicmuser
 USER damicmuser
-
-##### environment for DAMIC simulation code
-ENV HOME /home/damicmuser
-ENV DAMICM_SIM_ROOT /home/damicmuser/G4104Sim/DamicG4
-ENV DAMICM_RUN_DIR $DAMICM_SIM_ROOT/build
-ENV PATH="${PATH}:$DAMICM_SIM_ROOT"
-ENV PATH="${PATH}:$DAMICM_SIM_ROOT/build"
 
 ENTRYPOINT ["/bin/bash"]
 
