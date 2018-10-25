@@ -20,14 +20,14 @@ execute docker without requiring sudo:
 $ sudo usermode -a -G $USER
 ```
 
-1. Clone the docker geant4.10.3 repository
+#### 1. Clone the docker geant4.10.3 repository
 
 ```bash
 $ git clone https://github.com/ncastello/dockerfiles-damicm-G410.4.git
 $ cd dockerfiles-damicm-G410.4
 ```
 
-2. To get the docker container you can either download the image from the dockerhub
+#### 2. To get the docker container you can either download the image from the dockerhub
    ```bash
    $ docker pull ncastello/damicm-geant4.10.4
    ```
@@ -49,7 +49,7 @@ $ xhost +local:docker
 
 There are two ways to use this container:
 
-1. __As user__
+#### 1. __As user__
 
     The recommended way to run dockerfiles-damicm-G410.4 is with docker-compose
 
@@ -61,7 +61,7 @@ There are two ways to use this container:
     will allow you to run this container under a __production environment__.
     
 
-2. __As developer__
+#### 2. __As developer__
 
     However, if what you need is to develop GEBIC, i.e. to use this container in a
     __development environment__ and consequently have a link to your host-computer,
@@ -94,12 +94,12 @@ By default, `docker-compose` use the override yml file.
 
 ## Usefull `docker` commands
 
-1. List containers
+#### 1. List containers
     ```bash
     $ docker ps
     ```
 
-2. Deleting ...
+#### 2. Deleting ...
     ```bash
     $ docker image prune
     $ docker container prune
