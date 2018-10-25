@@ -1,10 +1,11 @@
-# dockerfiles-damicm-geant4.10.3
+# dockerfiles-damicm-G410.4
 Docker context to create docker Geant4 10.3 image to developments and background
 studies with Geant4 for DAMIC@MODENA
-# dockerfiles-damicm-geant4.10.3
+# dockerfiles-damicm-G410.4
 
-Docker __context__ to create docker Geant4 version 10.3 image to developments and background studies with Geant4 for DAMIC at SNOLAB.
-This image is based on an ubuntu-16.04 and contains the necessary packages to run DamicG4 software (git@gitlab.in2p3.fr:damicm/DAMICSNOLAB_G4sims).
+Docker __context__ to create docker Geant4 version 10.4 image to developments and background studies for 
+DAMIC@Modane (DAMIC-M experiment). This image is based on an ubuntu-16.04 and contains the necessary 
+packages to run DAMICMG4 (private repository git@gitlab.in2p3.fr:damicm/DAMICSNOLAB_G4sims).
 
 ## Install
 
@@ -50,19 +51,15 @@ There are two ways to use this container:
 
 1. __As user__
 
-    The recommended way to run GEBIC is with docker-compose
+    The recommended way to run dockerfiles-damicm-G410.4 is with docker-compose
 
     ```bash
     $ docker-compose run --rm <service_name>
     ```
 
-    where <service_name> can be found in the docker-compose.yml file (i.e `damicdev`). This
-    will allow you to run GEBIC under a __production environment__.
-    The GEBIC software is installed under the path  `/gebic` (where the code for both
-    detectors, GeLatuca and GeOroel, are installed in differents folders).
-
-    Once you are in, you can just start to work!
-
+    where <service_name> can be found in the docker-compose.yml file (i.e `damicdev` in the example below). This
+    will allow you to run this container under a __production environment__.
+    
 
 2. __As developer__
 
@@ -77,13 +74,12 @@ There are two ways to use this container:
         damicdev:
             volumes:
                 - type: bind
-                 source: @global_path_to_your_GEBIC_source_folder
-                 target: /gebic
+                 source: @global_path_to_some_local_folder
+                 target: /workingdir
     ```
-    where @global_path_to_your_GEBIC_source_folder is __the path in the host-computer__ to
-    GEBIC.
-
-    This means the folder /gebic (in the container) is linked to global_path_to_your_GEBIC_source_folder (in the host-computer).
+    where @global_path_to_some_local_folder is __the path in the host-computer__ to be shared with the container, 
+    is the way to transfer information between your computer and the container. This means /workingdir (in the 
+    container) is linked to global_path_to_some_local_folder (in the host-computer).
 
 ## Note
 
