@@ -9,25 +9,31 @@ This image is based on an ubuntu-16.04 and contains the necessary packages to ru
 ## Install
 
 Assuming `docker` and `docker-compose` is installed on your system (host-computer).
+[how to install docker](https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce-1) in linux
+[how to install docker-compose](https://docs.docker.com/compose/install/#install-compose) in linux
+execute docker without requiring sudo: 
+```
+$ sudo usermode -a -G $USER
+```
 
 1. Clone the docker geant4.10.3 repository
 
 ```bash
-$ git clone https://github.com/ncastello/dockerfiles-geant4.9
-$ cd dockerfiles-geant4.9
+$ git clone https://github.com/ncastello/dockerfiles-damicm-G410.4.git
+$ cd dockerfiles-damicm-G410.4
 ```
 
 2. To get the docker container you can either download the image from the dockerhub
    ```bash
-   $ docker pull ncastello/gebic-geant4.9
+   $ docker pull ncastello/damicm-geant4.10.4
    ```
-   or alternatively build the docker image from the Dockerfile:
+   or alternatively build the docker image from the Dockerfile using docker-compose:
 
    ```bash
    # Using docker
-   $ docker build github.com/ncastello/gebic-geant4.9
+   $ docker build github.com/ncastello/dockerfiles-damicm-G410.4
    # Using docker-compose within the repo directory
-   $ docker-compose build gebic-geant4.9
+   $ docker-compose build damicm-geant4.10.4
    ```
 
 ## USAGE
@@ -101,8 +107,3 @@ By default, `docker-compose` use the override yml file.
     $ docker system prune
     $ docker network prune
     ```
-
-
-
-
-
