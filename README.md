@@ -12,14 +12,16 @@ packages to run DAMICMG4 (private repository git@gitlab.in2p3.fr:damicm/DAMICSNO
 #### installing prerequisites
 Assuming `docker` and `docker-compose` is installed on your system (host-computer).
 
-[how to install docker](https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce-1) in linux
+[how to install docker](https://docs.docker.com/install/linux/docker-ce/debian/#install-docker-ce-1) for linux
 
-[how to install docker-compose](https://docs.docker.com/compose/install/#install-compose) in linux
+[how to install docker-compose](https://docs.docker.com/compose/install/#install-compose) for linux
 
 execute docker without requiring sudo: 
 ```
 $ sudo usermode -a -G $USER
 ```
+
+[post-installation steps](https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user) for linux
 
 #### 1. Clone the docker geant4.10.3 repository
 
