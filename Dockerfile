@@ -86,7 +86,7 @@ RUN mkdir -p /opt/geant4.10 \
        -DGEANT4_USE_OPENGL_X11=ON  \
        -DGEANT4_USE_RAYTRACER_X11=ON \
        -DGEANT4_USE_GDML=ON \
-       -DCMAKE_BUILD_TYPE=Debug \
+#       -DCMAKE_BUILD_TYPE=Debug \
        -Wno-dev \
 #       -DGEANT4_INSTALL_DATADIR=/data/geant4-10.4.1/data \
 #       -DGEANT4_USE_FREETYPE=ON \
@@ -104,8 +104,18 @@ RUN mkdir /home/damicmuser/scripts && chown -R damicmuser:damicmuser /home/damic
 
 COPY my_scripts/compile_DAMICMG4_in_docker.sh /home/damicmuser/scripts
 
-WORKDIR /home/damicmuser
+#### setting vim preferences
+COPY settingvim/vim /home/damicmuser/.vim
+COPY settingvim/vimrc /home/damicmuser/.vimrc
+RUN chown -R damicmuser:damicmuser /home/damicmuser/.vim \
+	&& chown damicmuser:damicmuser /home/damicmuser/.vimrc
+
 USER damicmuser
+WORKDIR /home/damicmuser
+ENV HOME=/home/damicmuser
+RUN touch /home/damicmuser/.pythonrc
+ENV PYTHONSTARTUP=/home/damicmuser/.pythonrc
+ENV PATH=${PATH}:/home/damicmuser/.local/bin
 
 ENTRYPOINT ["/bin/bash"]
 
