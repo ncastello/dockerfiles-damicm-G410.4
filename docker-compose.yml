@@ -22,7 +22,7 @@ services:
               source: /home/ncastello/repos/DAMIC-DAMIC-M/DAMICM_G4Sims
               target: /home/damicmuser/G4104Source
             - type: bind
-              source: /home/ncastello/workdir/DAMICM/simulations/G4104Run
+              source: /data/DAMICM/G4Run
               target: /home/damicmuser/G4104Run
             - type: bind
               source: /home/ncastello/repos/PyAnUtils
@@ -38,7 +38,7 @@ services:
         volumes:
             - /tmp/.X11-unix:/tmp/.X11-unix
             - type: bind
-              source: /home/ncastello/workdir/DAMIC/simulations/G4104Run
+              source: /data/DAMICM/G4Run
               target: /home/damicmuser/G4104Run
             - type: bind
               source: /home/ncastello/repos/DAMIC-DAMIC-M/DAMIC100_G4outchanged
@@ -56,7 +56,7 @@ services:
               source: /home/ncastello/repos/DAMIC-DAMIC-M/DAMICSNOLAB_G4sims
               target: /home/damicmuser/G4104Source
             - type: bind
-              source: /home/ncastello/workdir/DAMIC100/simulations/G4104Run
+              source: /data/DAMICM/G4Run
               target: /home/damicmuser/G4104Run
 
     recon:

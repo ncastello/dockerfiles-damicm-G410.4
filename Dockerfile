@@ -102,13 +102,16 @@ RUN mkdir /home/damicmuser/scripts && chown -R damicmuser:damicmuser /home/damic
     && mkdir /home/damicmuser/G4104Source && chown -R damicmuser:damicmuser /home/damicmuser/G4104Source \
     && mkdir /home/damicmuser/G4104Run && chown -R damicmuser:damicmuser /home/damicmuser/G4104Run
 
-COPY my_scripts/compile_DAMICMG4_in_docker.sh /home/damicmuser/scripts
+RUN echo 'export PATH=${PATH}:/home/damicmuser/G4104Run/build' >>  ~damicmuser/.bashrc  \
+    && chown damicmuser:damicmuser ~damicmuser/.bashrc 
+
+#COPY my_scripts/compile_DAMICMG4_in_docker.sh /home/damicmuser/scripts
 
 #### setting vim preferences
-COPY settingvim/vim /home/damicmuser/.vim
-COPY settingvim/vimrc /home/damicmuser/.vimrc
-RUN chown -R damicmuser:damicmuser /home/damicmuser/.vim \
-	&& chown damicmuser:damicmuser /home/damicmuser/.vimrc
+#COPY settingvim/vim /home/damicmuser/.vim
+#COPY settingvim/vimrc /home/damicmuser/.vimrc
+#RUN chown -R damicmuser:damicmuser /home/damicmuser/.vim \
+#	&& chown damicmuser:damicmuser /home/damicmuser/.vimrc
 
 USER damicmuser
 WORKDIR /home/damicmuser
